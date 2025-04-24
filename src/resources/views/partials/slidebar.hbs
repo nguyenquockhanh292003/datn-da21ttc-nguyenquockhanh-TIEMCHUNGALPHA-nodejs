@@ -1,0 +1,174 @@
+<ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Dashboard</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link" href="/home">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Quản lý
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Người dùng</span>
+        </a>
+        <div id="collapseUser" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Chức năng:</h6>
+                <a class="collapse-item" href="/users/addUser">Thêm mới</a>
+                <a class="collapse-item" href="/users/listAllUser">Danh sách tài khoản</a>
+                <a class="collapse-item" href="/users/ListAllTeacher">Quản lý giảng viên</a>
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#listAllCourse"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fa-regular fa-hard-drive"></i>
+            <span>Thiết bị</span>
+        </a>
+        <div id="listAllCourse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Chức năng:</h6>
+                <a class="collapse-item" href="/deviceManger/home" >Quản lý thiết bị</a>
+                <a class="collapse-item" href="/deviceToRoom/home">Quản lý theo phòng</a>
+                <a class="collapse-item" href="/borrowRepay/home">Quản lý mượn/trả</a>
+            </div>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBlog"
+            aria-expanded="true" aria-controls="collapseBlog">
+            <i class="fa-solid fa-gift"></i>
+            <span>Quà tặng</span>
+        </a>
+        <div id="collapseBlog" class="collapse" aria-labelledby="headingBlog" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Chức năng:</h6>
+                <a class="collapse-item" href="/reward/home" >Quản lý quà tặng</a>
+                <a class="collapse-item" href="/reward/listRequestReward" >Quản lý đơn yêu cầu</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Thống kê
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/statistic/borrowReturn">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Mượn trả</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/statistic/device">
+            <i class="fa-regular fa-hard-drive"></i>
+            <span>Thiết bị</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/statistic/reward">
+            <i class="fa-solid fa-gift"></i>
+            <span>Quà tặng</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+        <a class="nav-link" href="/users/profile/me">
+            <i class="fa-solid fa-address-card"></i>
+            <span>Thông tin cá nhân</span></a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" onclick="handleLogout()">
+        <i class="fas fa-fw fa-cogs"></i>
+        <span>Đăng xuất</span>
+    </a>
+    <script>
+        function handleLogout() {
+            Swal.fire({
+                title: 'Bạn muốn đăng xuất?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Đồng ý',
+                cancelButtonText: 'Hủy',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Gọi API đăng xuất
+                    fetch('http://localhost:3000/api/logout', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        credentials: 'same-origin' // Đảm bảo rằng cookies/session sẽ được gửi cùng yêu cầu
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) { 
+                            // Đăng xuất thành công, chuyển hướng về trang đăng nhập
+                            Swal.fire({
+                                title: 'Đăng xuất thành công!',
+                                icon: 'success',
+                                timer: 2000,
+                                showConfirmButton: false,
+                            }).then(() => {
+                                window.location.href = '/'; 
+                            });
+                        } else {
+                            Swal.fire('Lỗi', 'Đăng xuất thất bại', 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        Swal.fire('Lỗi', 'Đăng xuất thất bại', 'error');
+                    });
+                }
+            });
+        }
+    </script>
+    </li>
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>
+
+<script>
+    function DangPhatTrien() {
+        Swal.fire({
+            title: 'Tính năng đang phát triển!',
+            text: 'Huệ Trung sẽ sớm cập nhật tính năng này.',
+            icon: 'info',
+            confirmButtonText: 'Đóng'
+        });
+        return false; // Ngăn form submit hoặc hành động mặc định
+    }
+</script>

@@ -1,0 +1,74 @@
+<nav id="navigation">
+  <!-- container -->
+  <div class="container">
+    <!-- responsive-nav -->
+    <div id="responsive-nav">
+      <!-- NAV -->
+      <ul class="main-nav nav navbar-nav" style="flex-direction: row;">
+        <li class="active"><a href="/home">Trang chủ</a></li>
+        <li><a href="/gioithieu">Giới thiệu</a></li>
+
+        <li >
+          <div class="dropdown">
+            <style>
+              .btn-navbar-dichvu{
+                    padding: 20px 0px;
+                    background: none;
+                    color: #2B2D42;
+                    font-weight: 500;
+              }
+              .btn-navbar-dichvu:hover, .btn-navbar-dichvu:focus{
+                      color: #D10024;
+                      background-color: transparent;
+                      text-decoration: none;
+                      border: none;
+                      box-shadow: 0 0 0 .25rem rgb(130 138 145 / 0%);
+              }
+            </style>
+            <button class="btn btn-secondary dropdown-toggle btn-navbar-dichvu" type="button" id="dropdownMenuButton1"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Dịch vụ
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">Tiêm chủng tại Trung tâm</a></li>
+              <li><a class="dropdown-item" href="#">Tiêm chủng cho doanh nghiệp, trường học</a></li>
+              <li><a class="dropdown-item" href="#">Tiêm chủng Gói/Ưu tiên</a></li>
+              <li><a class="dropdown-item" href="#">Tiêm chủng theo yêu cầu</a></li>
+              <li><a class="dropdown-item" href="#">Tiêm chủng VIP</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="#">Bác sĩ</a></li>
+        <li><a href="/goivacxin">Gói vắc xin</a></li>
+        <li><a href="/banggia">Bảng giá</a></li>
+        <li><a href="/tintuc">Tin tức</a></li>
+      </ul>
+      <!-- /NAV -->
+    </div>
+    <!-- /responsive-nav -->
+  </div>
+  <!-- /container -->
+</nav>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Lấy danh sách các mục menu
+    const menuItems = document.querySelectorAll(".main-nav li");
+
+    // Lấy đường dẫn hiện tại (pathname) của URL
+    const currentPath = window.location.pathname;
+
+    // Duyệt qua từng mục menu
+    menuItems.forEach((item) => {
+      const link = item.querySelector("a");
+      const linkPath = link.getAttribute("href");
+
+      // Xóa lớp active khỏi tất cả các mục
+      item.classList.remove("active");
+
+      // So sánh pathname với href
+      if (currentPath === linkPath || (currentPath === "/" && linkPath === "/home")) {
+        item.classList.add("active");
+      }
+    });
+  });
+</script>
