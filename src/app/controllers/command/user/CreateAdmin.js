@@ -12,7 +12,7 @@ class CreateAdmin {
     /**
      * Hàm CreateAdmin
      * Kiểm tra xem tài khoản quản trị viên hệ thống đã tồn tại chưa. Nếu chưa tồn tại, 
-     * tạo tài khoản mới với thông tin cố định.
+     * tạo tài khoản mới với thông tin cố định.      
      */
     CreateAdmin = async () => {
         try {
